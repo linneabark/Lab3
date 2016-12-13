@@ -76,13 +76,4 @@ public abstract class GameUtils implements GameModel {
     public Dimension getGameboardSize() {
         return this.gameboardSize;
     }
-
-    /**
-     * This method is called repeatedly so that the game can update it's state.
-     *
-     * @param lastKey
-     *            The most recent keystroke.
-     */
-
 }
-
