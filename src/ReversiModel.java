@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
  * @author evensen
  * 
  */
-public class ReversiModel extends GameModel {
+public class ReversiModel extends GameUtils {
 	public enum Direction {
 			EAST(1, 0),
 			SOUTHEAST(1, 1),
