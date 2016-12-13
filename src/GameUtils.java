@@ -3,8 +3,7 @@
  */
 
 public class GameUtils {
-
-    int x = 1;
+    
 
 }
 
