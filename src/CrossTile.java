@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
-public class CrossTile extends GameTile {
+public class CrossTile implements GameTile {
 	/** The color of the cross */
 	private final Color color;
 	private final Stroke stroke;
@@ -35,7 +35,6 @@ public class CrossTile extends GameTile {
 	 * @param d
 	 *            size of this object in pixels.
 	 */
-	@Override
 	public void draw(final Graphics g, final int x, final int y,
 			final Dimension d) {
 		Graphics2D g2 = (Graphics2D) g;
