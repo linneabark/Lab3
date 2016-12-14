@@ -42,7 +42,7 @@ public class GoldModel extends GameUtils {
 	private final Dimension gameboardSize = Constants.getGameSize();
 	private GameTile[][] gameboardState;
 
-	int x;
+
 
 
 	public void setGameboardState(final Position pos, final GameTile tile) {
