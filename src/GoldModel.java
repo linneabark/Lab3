@@ -39,6 +39,32 @@ public class GoldModel extends GameUtils {
 		}
 	}
 
+	private final Dimension gameboardSize = Constants.getGameSize();
+	private GameTile[][] gameboardState;
+
+
+	public void setGameboardState(final Position pos, final GameTile tile) {
+		setGameboardState(pos.getX(), pos.getY(), tile);
+	}
+
+	public void setGameboardState(final int x, final int y,
+									 final GameTile tile) {
+		this.gameboardState[x][y] = tile;
+	}
+
+	public Dimension getGameboardSize() {
+		return gameboardSize;
+	}
+
+	public GameTile getGameboardState(final int x, final int y) {
+		return gameboardState[x][y];
+	}
+
+	public GameTile getGameboardState(final Position pos){
+		return getGameboardState(pos.getX(), pos.getY());
+	}
+
+
 	private static final int COIN_START_AMOUNT = 20;
 
 	/*
@@ -87,6 +113,8 @@ public class GoldModel extends GameUtils {
 	 */
 	public GoldModel() {
 		Dimension size = getGameboardSize();
+
+		this.gameboardState = new GameTile[this.gameboardSize.width][this.gameboardSize.height];
 
 		// Blank out the whole gameboard
 		for (int i = 0; i < size.width; i++) {

@@ -38,6 +38,10 @@ public class ReversiModel extends GameUtils {
 		}
 	}
 
+	private final Dimension gameboardSize = Constants.getGameSize();
+	private GameTile[][] gameboardState;
+
+
 	public enum Turn {
 		BLACK,
 		WHITE;
@@ -87,6 +91,8 @@ public class ReversiModel extends GameUtils {
 		this.width = Constants.getGameSize().width;
 		this.height = Constants.getGameSize().height;
 		this.board = new PieceColor[this.width][this.height];
+
+		this.gameboardState = new GameTile[this.gameboardSize.width][this.gameboardSize.height];
 
 		// Blank out the whole gameboard...
 		for (int i = 0; i < this.width; i++) {
@@ -363,6 +369,27 @@ public class ReversiModel extends GameUtils {
 			cursoredTile = new CompositeTile(t, cursorRedTile);
 		}
 		setGameboardState(this.cursorPos, cursoredTile);
+	}
+
+	public void setGameboardState(final Position pos, final GameTile tile) {
+		setGameboardState(pos.getX(), pos.getY(), tile);
+	}
+
+	public void setGameboardState(final int x, final int y,
+								  final GameTile tile) {
+		this.gameboardState[x][y]  = tile; //getGameBoardState[x][y] = tile;
+	}
+
+	public Dimension getGameboardSize() {
+		return gameboardSize;
+	}
+
+	public GameTile getGameboardState(final int x, final int y) {
+			return gameboardState[x][y];
+	}
+
+	public GameTile getGameboardState(final Position pos){
+		return getGameboardState(pos.getX(), pos.getY());
 	}
 
 }
