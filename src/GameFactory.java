@@ -9,7 +9,7 @@ public class GameFactory implements IGameFactory {
 	 */
 	@Override
 	public String[] getGameNames() {
-		return new String[] { "Gold", "Reversi"};
+		return new String[] { "Reversi", "Gold"};
 	}
 
 	/**
