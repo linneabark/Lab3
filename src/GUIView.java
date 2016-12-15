@@ -1,7 +1,10 @@
+import com.sun.org.apache.xpath.internal.axes.ReverseAxesWalker;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,7 +16,7 @@ import javax.swing.JPanel;
  * a gui for choosing a new game. The list of games will be aquired from
  * a GameFactory.
  */
-public class GUIView extends JPanel {
+public class GUIView extends JPanel{
 	/** The "Start Game" button */
 	private final JButton startGameButton;
 
@@ -46,6 +49,7 @@ public class GUIView extends JPanel {
 
 		// Create a new GameFactory
 		this.gameFactory = factory;
+
 
 		// Set the background on the GameView
 		this.gameView.setBackground(Color.white);
@@ -82,7 +86,8 @@ public class GUIView extends JPanel {
 		return this.gameController;
 	}
 
-	/**
+
+    /**
 	 * This inner class will listen for presses on the "Start Game" button.
 	 * It will respond by creating a new game model and starting it using
 	 * the game controller.

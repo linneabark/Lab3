@@ -48,6 +48,11 @@ public class ReversiModel extends GameUtils {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 
+	public PropertyChangeSupport getPcs (PropertyChangeSupport pcs){
+		return this.pcs;
+	}
+
+
 
 	public enum Turn {
 		BLACK,
@@ -173,12 +178,6 @@ public class ReversiModel extends GameUtils {
 
 	private void tryPlay() {
 		if (isPositionEmpty(this.cursorPos)) {
-			GameTile t;
-			if (this.turn == Turn.BLACK) {
-				t = blackGridTile;
-			} else {
-				t = whiteGridTile;
-			}
 			if (canTurn(this.turn, this.cursorPos)) {
 				turnOver(this.turn, this.cursorPos);
 				//setGameboardState(this.cursorPos, t);
@@ -347,6 +346,7 @@ public class ReversiModel extends GameUtils {
 		} else {
 			throw new GameOverException(this.blackScore - this.whiteScore);
 		}
+		pcs.firePropertyChange("gameupdate", true, false);
 	}
 
 	private void removeCursor(final Position oldCursorPos) {
@@ -364,7 +364,7 @@ public class ReversiModel extends GameUtils {
 
 	private void updateCursor() {
 		GameTile t = getGameboardState(this.cursorPos);
-		GameTile cursoredTile;
+		/*GameTile cursoredTile;
 		if (canTurn(this.turn, this.cursorPos)) {
 			if (this.turn == Turn.BLACK) {
 				cursoredTile = new CompositeTile(t, cursorBlackTile);
@@ -374,7 +374,7 @@ public class ReversiModel extends GameUtils {
 		} else {
 			cursoredTile = new CompositeTile(t, cursorRedTile);
 		}
-		//setGameboardState(this.cursorPos, cursoredTile);
+		//setGameboardState(this.cursorPos, cursoredTile);*/
 	}
 	private boolean isCursorOnPos (Position pos){
 		return this.cursorPos.equals(pos);

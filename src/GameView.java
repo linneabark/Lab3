@@ -56,6 +56,7 @@ public class GameView extends JComponent implements PropertyChangeListener {
 	 */
 	public void setModel(final GameModel model) {
 		this.model = model;
+		if(model!= null) model.addObserver(this);
 		repaint();
 	}
 
@@ -112,6 +113,6 @@ public class GameView extends JComponent implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-
+		repaint();
 	}
 }

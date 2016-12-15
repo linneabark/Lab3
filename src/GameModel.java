@@ -36,6 +36,7 @@ public interface GameModel extends IObservable{
 	 */
 	Dimension getGameboardSize();
 
+
 	/**
 	 * This method is called repeatedly so that the game can update it's state.
 	 * 
