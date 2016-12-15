@@ -428,7 +428,7 @@ public class ReversiModel extends GameUtils {
 		if (getPieceColor(pos) == PieceColor.WHITE && isCursorOnPos(pos)){
 			return new CompositeTile(whiteGridTile, cursorRedTile);
 		}
-		return blankTile;
+		return whiteTile;
 
 	}
 
