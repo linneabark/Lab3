@@ -71,10 +71,9 @@ public class GameController implements Runnable {
 
 		if (this.gameModel.getUpdateSpeed() > 0){
 			this.keypresses.add(Integer.valueOf(key));
-		} else {
+		} if(this.gameModel.getUpdateSpeed() <= 0) {
 			try {
 				gameModel.gameUpdate(key);{
-
 				}
 			} catch (GameOverException e) {
 				e.printStackTrace();
@@ -118,8 +117,11 @@ public class GameController implements Runnable {
 		this.isRunning = true;
 
 		// Create the new thread and start it...
-		this.gameThread = new Thread(this);
-		this.gameThread.start();
+		if (gameModel.getUpdateSpeed() > 0){
+			this.gameThread = new Thread(this);
+			this.gameThread.start();
+		}
+
 	}
 
 	/**
@@ -158,9 +160,10 @@ public class GameController implements Runnable {
 			try {
 				// Tell model to update, send next key press.
 				// or 0 if no new keypress since last update.
-				this.gameModel.gameUpdate(nextKeyPress());
+					this.gameModel.gameUpdate(nextKeyPress());
+					//System.out.print("in run");
+					Thread.sleep(this.gameModel.getUpdateSpeed());
 
-				Thread.sleep(this.gameModel.getUpdateSpeed());
 			} catch (GameOverException e) {
 				// we got a game over signal, time to exit...
 				// The current implementation ignores the game score
@@ -169,6 +172,8 @@ public class GameController implements Runnable {
 			} catch (InterruptedException e) {
 				// if we get this exception, we're asked to terminate ourselves
 				this.isRunning = false;
+			} catch (Exception e){
+				e.printStackTrace();
 			}
 		}
 	}
