@@ -186,8 +186,7 @@ public class ReversiModel extends GameUtils {
 						(this.turn == Turn.BLACK
 								? PieceColor.BLACK
 								: PieceColor.WHITE);
-				System.out.println("Bong! White: " + this.whiteScore
-						+ "\tBlack: " + this.blackScore);
+				pcs.firePropertyChange("score", true, false);
 				this.turn = Turn.nextTurn(this.turn);
 			}
 			if (!canTurn(this.turn)) {
@@ -344,10 +343,11 @@ public class ReversiModel extends GameUtils {
 			removeCursor(this.cursorPos);
 			this.cursorPos = nextCursorPos;
 			updateCursor();
+			pcs.firePropertyChange("gameupdate", true, false);
 		} else {
 			throw new GameOverException(this.blackScore - this.whiteScore);
 		}
-		pcs.firePropertyChange("gameupdate", true, false);
+
 	}
 
 	private void removeCursor(final Position oldCursorPos) {

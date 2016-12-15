@@ -1,3 +1,6 @@
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /**
  * Factory class for available games.
  */
@@ -27,7 +30,10 @@ public class GameFactory implements IGameFactory {
 		}
 
 		else if (gameName.equals("Reversi")) {
-			return new ReversiModel();
+
+			ReversiModel reversi = new ReversiModel();
+			reversi.addObserver(new ReversiScoreView());
+			return reversi;
 		}
 
 		throw new IllegalArgumentException("No such game: " + gameName);
