@@ -68,7 +68,18 @@ public class GameController implements Runnable {
 	 * Add a key press to the end of the queue
 	 */
 	private synchronized void enqueueKeyPress(final int key) {
-		this.keypresses.add(Integer.valueOf(key));
+
+		if (this.gameModel.getUpdateSpeed() > 0){
+			this.keypresses.add(Integer.valueOf(key));
+		} else {
+			try {
+				gameModel.gameUpdate(key);{
+
+				}
+			} catch (GameOverException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -149,8 +160,7 @@ public class GameController implements Runnable {
 				// or 0 if no new keypress since last update.
 				this.gameModel.gameUpdate(nextKeyPress());
 
-
-				Thread.sleep(this.updateInterval);
+				Thread.sleep(this.gameModel.getUpdateSpeed());
 			} catch (GameOverException e) {
 				// we got a game over signal, time to exit...
 				// The current implementation ignores the game score

@@ -98,6 +98,7 @@ public class ReversiModel extends GameUtils {
 	private final int width;
 	private final int height;
 	private boolean gameOver;
+	private int updateSpeed = 0;
 
 	public ReversiModel() {
 		this.width = Constants.getGameSize().width;
@@ -440,6 +441,11 @@ public class ReversiModel extends GameUtils {
 	@Override
 	public void removeObserver(PropertyChangeListener observer) {
 		this.pcs.removePropertyChangeListener(observer);
+
+	}
+
+	public int getUpdateSpeed(){
+		return updateSpeed;
 
 	}
 

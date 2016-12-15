@@ -90,6 +90,8 @@ public class GoldModel implements GameModel{
 	/** The number of coins found. */
 	private int score;
 
+	private int updateSpeed = 200;
+
 	/**
 	 * Create a new model for the gold game.
 	 */
@@ -260,5 +262,10 @@ public class GoldModel implements GameModel{
 	public GameTile getGameboardState(final Position pos){
 		return getGameboardState(pos.getX(), pos.getY());
 	}
+
+	public int getUpdateSpeed(){
+	    return updateSpeed;
+
+    }
 
 }
