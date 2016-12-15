@@ -148,7 +148,7 @@ public class GameController implements Runnable {
 				// Tell model to update, send next key press.
 				// or 0 if no new keypress since last update.
 				this.gameModel.gameUpdate(nextKeyPress());
-				
+
 
 				Thread.sleep(this.updateInterval);
 			} catch (GameOverException e) {

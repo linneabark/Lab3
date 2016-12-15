@@ -16,7 +16,7 @@ import java.util.List;
  * of remaining coins. The game is won when all coins are collected and lost when
  * collector leaves game board.
  */
-public class GoldModel extends GameUtils {
+public class GoldModel implements GameModel{
 
 	public enum Directions {
 		EAST(1, 0),
@@ -42,45 +42,10 @@ public class GoldModel extends GameUtils {
 		}
 	}
 
-	//private PropertyChangeSupport pcs = new PropertyChangeSupport();
-
 	private final Dimension gameboardSize = Constants.getGameSize();
 	private GameTile[][] gameboardState;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-
-
-	@Override
-	public void addObserver(PropertyChangeListener observer) {
-		this.pcs.addPropertyChangeListener(observer);
-	}
-
-	@Override
-	public void removeObserver(PropertyChangeListener observer) {
-		this.pcs.removePropertyChangeListener(observer);
-	}
-
-	public void setGameboardState(final Position pos, final GameTile tile) {
-		setGameboardState(pos.getX(), pos.getY(), tile);
-	}
-
-	public void setGameboardState(final int x, final int y,
-									 final GameTile tile) {
-		this.gameboardState[x][y] = tile;
-	}
-
-	public Dimension getGameboardSize() {
-		return gameboardSize;
-	}
-
-	public GameTile getGameboardState(final int x, final int y) {
-		return gameboardState[x][y];
-	}
-
-	public GameTile getGameboardState(final Position pos){
-		return getGameboardState(pos.getX(), pos.getY());
-	}
-
 
 	private static final int COIN_START_AMOUNT = 20;
 
@@ -218,9 +183,10 @@ public class GoldModel extends GameUtils {
 	 * @param lastKey
 	 *            The most recent keystroke.
 	 */
-	@Override
+
 	public void gameUpdate(final int lastKey) throws GameOverException {
-		updateDirection(lastKey);
+        System.out.println("gold update");
+        updateDirection(lastKey);
 
 		// Erase the previous position.
 		setGameboardState(this.collectorPos, BLANK_TILE);
@@ -250,6 +216,7 @@ public class GoldModel extends GameUtils {
 
 		// Add a new coin (simulating moving one coin)
 		addCoin();
+        pcs.firePropertyChange("gameupdate", true, false);
 
 	}
 
@@ -261,6 +228,37 @@ public class GoldModel extends GameUtils {
 	private boolean isOutOfBounds(Position pos) {
 		return pos.getX() < 0 || pos.getX() >= getGameboardSize().width
 				|| pos.getY() < 0 || pos.getY() >= getGameboardSize().height;
+	}
+
+
+	public void addObserver(PropertyChangeListener observer) {
+		this.pcs.addPropertyChangeListener(observer);
+	}
+
+
+	public void removeObserver(PropertyChangeListener observer) {
+		this.pcs.removePropertyChangeListener(observer);
+	}
+
+	public void setGameboardState(final Position pos, final GameTile tile) {
+		setGameboardState(pos.getX(), pos.getY(), tile);
+	}
+
+	public void setGameboardState(final int x, final int y,
+								  final GameTile tile) {
+		this.gameboardState[x][y] = tile;
+	}
+
+	public Dimension getGameboardSize() {
+		return gameboardSize;
+	}
+
+	public GameTile getGameboardState(final int x, final int y) {
+		return gameboardState[x][y];
+	}
+
+	public GameTile getGameboardState(final Position pos){
+		return getGameboardState(pos.getX(), pos.getY());
 	}
 
 }
